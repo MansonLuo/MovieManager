@@ -1,5 +1,7 @@
 package com.example.moviemanager
 
+import android.os.Build
+import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 
 @Composable
@@ -29,6 +33,7 @@ fun MovieDetailScreen(movieUrl: String?) {
     }
 }
 
+@OptIn(UnstableApi::class)
 @Composable
 fun ExoPlayerView(movieUrl: String) {
     // Get the current context
@@ -58,7 +63,12 @@ fun ExoPlayerView(movieUrl: String) {
     AndroidView(
         factory = { ctx ->
             PlayerView(ctx).apply {
+                resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 player = exoPlayer
+
+                if (Build.VERSION.SDK_INT >= 29) {
+                    transitionAlpha = 0.5f  // fix black screen delay after press back button
+                }
             }
         },
         modifier = Modifier
