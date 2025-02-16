@@ -49,6 +49,21 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // media3
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+
+    // coil3 image load
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+    // Compose navigation
+    implementation(libs.androidx.navigation.compose)
+
+    // Compose viewModel
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
