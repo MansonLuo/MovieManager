@@ -28,7 +28,9 @@ fun NavigationStack() {
                 }
             )
         ) {
-            MovieDetailScreen(movieUrl = it.arguments?.getString("movieUrl"))
+            MovieDetailScreen(movieUrl = it.arguments?.getString("movieUrl")) {
+                navController.popBackStack()
+            }
         }
 
         composable(

@@ -1,6 +1,8 @@
 package com.example.moviemanager
 
 import android.os.Build
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,15 +29,15 @@ import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 
 @Composable
-fun MovieDetailScreen(movieUrl: String?) {
+fun MovieDetailScreen(movieUrl: String?, onBackPressCallback: () -> Unit) {
     movieUrl?.let {  url ->
-        ExoPlayerView(url)
+        ExoPlayerView(url, onBackPressCallback)
     }
 }
 
 @OptIn(UnstableApi::class)
 @Composable
-fun ExoPlayerView(movieUrl: String) {
+fun ExoPlayerView(movieUrl: String, onBackPressCallback: () -> Unit) {
     // Get the current context
     val context = LocalContext.current
 
@@ -76,8 +78,22 @@ fun ExoPlayerView(movieUrl: String) {
             .height(200.dp)
     )
 
+    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current
 
+    LaunchedEffect(Unit) {
 
+        val backPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                exoPlayer.release()
+
+                // OnBackPressedCallback will avoid and cossumed back-press event, so it's necessary to manually perform "backpressed" through navConstroller.popUpBackstack()
+                onBackPressCallback()
+                this.remove()
+            }
+        }
+
+        onBackPressedDispatcher?.onBackPressedDispatcher?.addCallback(backPressedCallback)
+    }
 }
 
 /*
