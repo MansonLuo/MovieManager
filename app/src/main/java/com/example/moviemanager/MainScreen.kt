@@ -210,6 +210,7 @@ fun MainScreen(navController: NavController) {
                 .fillMaxSize()
         ) {
             MoviesGrid(navController)
+
         }
     }
 }

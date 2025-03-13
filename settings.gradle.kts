@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -21,3 +22,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "MovieManager"
 include(":app")
+
+include(":feature:settings")
+include(":core:designsystem")

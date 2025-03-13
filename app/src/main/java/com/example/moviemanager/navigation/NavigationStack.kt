@@ -1,4 +1,4 @@
-package com.example.moviemanager
+package com.example.moviemanager.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
@@ -6,6 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.moviemanager.MainScreen
+import com.example.moviemanager.MovieDetailScreen
+import com.example.moviemanager.Screen
+import com.example.moviemanager.SettingScreen
 
 @Composable
 fun NavigationStack() {

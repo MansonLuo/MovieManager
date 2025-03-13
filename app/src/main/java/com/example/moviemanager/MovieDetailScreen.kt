@@ -86,7 +86,7 @@ fun ExoPlayerView(movieUrl: String, onBackPressCallback: () -> Unit) {
             override fun handleOnBackPressed() {
                 exoPlayer.release()
 
-                // OnBackPressedCallback will avoid and cossumed back-press event, so it's necessary to manually perform "backpressed" through navConstroller.popUpBackstack()
+                // OnBackPressedCallback will avoid and consume back-press event, so it's necessary to manually perform "backpressed" through navConstroller.popUpBackstack()
                 onBackPressCallback()
                 this.remove()
             }
